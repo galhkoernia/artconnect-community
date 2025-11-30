@@ -1,0 +1,39 @@
+/*
+ * Created on Thu Nov 27 2025
+ *
+ * Copyright (c) 2025 Your Company
+ */
+
+ :root {
+  /* Color Palette - ArtConnect */
+  --color-deep: #07332c;
+  --color-olive: #485b46;
+  --color-soft: #afb7ac;
+  --color-accent: #bca879;
+  --color-bg: #ededed;
+  --color-text: #1f1f1f;
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');

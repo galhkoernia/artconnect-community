@@ -1,0 +1,34 @@
+/*
+ * Created on Thu Nov 27 2025
+ *
+ * Copyright (c) 2025 Your Company
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design Tokens */
+:root {
+  --color-deep: #07332c;
+  --color-olive: #485b46;
+  --color-soft: #afb7ac;
+  --color-accent: #bca879;
+  --color-bg: #ededed;
+  --color-text: #1f1f1f;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+}
