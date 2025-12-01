@@ -4,76 +4,108 @@
  * Copyright (c) 2025 Your Company
  */
 
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '../components/common/Button';
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Button } from "../components/common/Button";
+import { Menu } from "lucide-react";
 
 export const Header: React.FC = () => {
   const location = useLocation();
-  
-  return (
-    <header className="bg-white shadow-sm border-b border-soft">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-deep font-bold text-sm">A</span>
-              </div>
-              <h1 className="text-xl font-semibold text-deep">ArtConnect</h1>
-            </Link>
-          </div>
-          
-          {/* Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            <Link 
-              to="/" 
-              className={`transition-colors duration-200 font-medium ${
-                location.pathname === '/' ? 'text-deep font-semibold' : 'text-gray-600 hover:text-deep'
-              }`}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/feed" 
-              className={`transition-colors duration-200 font-medium ${
-                location.pathname === '/feed' ? 'text-deep font-semibold' : 'text-gray-600 hover:text-deep'
-              }`}
-            >
-              Community.Feed
-            </Link>
-            <a 
-              href="#" 
-              className="text-gray-600 hover:text-deep transition-colors duration-200 font-medium"
-            >
-              Exhibitions
-            </a>
-            <a 
-              href="#" 
-              className="text-gray-600 hover:text-deep transition-colors duration-200 font-medium"
-            >
-              Artists
-            </a>
-          </nav>
+  const [openMenu, setOpenMenu] = useState(false);
 
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-3">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="border-gray-300 text-gray-700 hover:border-deep hover:text-deep"
+  // Title Tengah
+  const pageTitle = (() => {
+    if (location.pathname === "/") return "Home";
+    if (location.pathname === "/feed") return "Community";
+    if (location.pathname === "/exhibitions") return "Exhibitions";
+    if (location.pathname === "/artists") return "Artists";
+    return "ArtConnect";
+  })();
+
+  // kategori art
+  const categories = ["Digital", "Illustration", "3D Art", "Pixel", "Photo"];
+
+  return (
+    <header className="w-full bg-bg border-b border-soft shadow-sm fixed top-0 left-0 z-50">
+      <div className="container mx-auto px-4">
+        
+        <div className="flex items-center justify-between h-16">
+
+           {/* Left Side — Hamburger & Mini Category List */}
+          <div className="flex items-center gap-3">
+
+            {/* Mobile Only - Hambuger */}
+            <button
+              className="md:hidden p-2 rounded-md bg-soft hover:bg-deep hover:text-white transition"
+              onClick={() => setOpenMenu(!openMenu)}
+            >
+              <Menu size={22} />
+            </button>
+
+            {/* Desktop Only */}
+            <div className="hidden md:flex items-center gap-3">
+              {categories.map((c, i) => (
+                <div
+                  key={i}
+                  className="w-[55px] h-[18px] bg-soft rounded-md opacity-70"
+                ></div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* CENTER TITLE */}
+          <h1 className="text-text font-semibold text-lg md:text-xl absolute left-1/2 transform -translate-x-1/2">
+            {pageTitle}
+          </h1>
+
+
+          {/* RIGHT SIDE — LOGIN / SIGNUP */}
+          <div className="flex items-center gap-2">
+
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-gray-300 text-text hover:border-deep hover:text-deep"
             >
               Login
             </Button>
-            <Button 
-              variant="primary" 
+
+            {/* SIGNUP ONLY ON DESKTOP */}
+            <Button
+              variant="primary"
               size="sm"
-              className="bg-deep text-white hover:bg-olive"
+              className="hidden md:flex bg-deep text-white hover:bg-olive"
             >
               Sign Up
             </Button>
           </div>
         </div>
+
+        {/* MOBILE DROPDOWN */}
+        {openMenu && (
+          <div className="md:hidden mt-3 bg-soft p-4 rounded-lg shadow-lg animate-slideDown">
+            <p className="text-text font-medium mb-2">Categories</p>
+
+            <div className="flex flex-col gap-2">
+              {categories.map((item, index) => (
+                <button
+                  key={index}
+                  className="text-text text-left px-3 py-2 rounded-md hover:bg-bg transition"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+
+            {/* SIGNUP APPEARS HERE ON MOBILE */}
+            <div className="mt-4">
+              <Button className="w-full bg-deep text-white hover:bg-olive">
+                Sign Up
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -4,7 +4,6 @@
  * Copyright (c) 2025 Your Company
  */
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
@@ -37,21 +36,12 @@ const SLIDES = [
     center: "src/assets/home/section1/section1-img-02.png",
     right: "src/assets/home/section1/section1-img-04.png",
   },
-  {
-    left: "src/assets/home/section1/section1-img-01.png",
-    center: "src/assets/home/section1/section1-img-02.png",
-    right: "src/assets/home/section1/section1-img-04.png",
-  },
-  {
-    left: "src/assets/home/section1/section1-img-01.png",
-    center: "src/assets/home/section1/section1-img-02.png",
-    right: "src/assets/home/section1/section1-img-04.png",
-  },
 ];
 
 
+// ==============================
 // SECTION 1
-
+// ==============================
 export function Section1() {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef<number | null>(null);
@@ -75,14 +65,14 @@ export function Section1() {
 
     const distance = touchStartX.current - touchEndX.current;
 
-    if (distance > 60) next(); // swipe left
-    if (distance < -60) prev(); // swipe right
+    if (distance > 60) next();
+    if (distance < -60) prev();
   };
 
   return (
     <section className="relative min-h-screen bg-bg overflow-hidden">
 
-      {/* BACKGROUND CAROUSEL */}
+      {/* Background */}
       <div
         className="absolute inset-0 overflow-hidden"
         onTouchStart={handleTouchStart}
@@ -96,83 +86,87 @@ export function Section1() {
           {SLIDES.map((slide, idx) => (
             <div key={idx} className="relative w-full h-full shrink-0">
 
-              {/* LEFT PANEL — 228×320 */}
-              <div className="absolute top-32 left-16 w-[228px] h-[320px] bg-soft rounded-t-[90px] overflow-hidden">
-                <img src={slide.left} className="w-full h-full object-cover" />
-              </div>
+        {/* Left Panel — 228×320 */}
+        <div className="absolute top-48 md:top-56 left-8 md:left-16 w-[180px] md:w-[228px] h-[250px] md:h-[320px] bg-soft rounded-t-[90px] overflow-hidden">
+  <img src={slide.left} className="w-full h-full object-cover" />
+        </div>
 
-              {/* CENTER PANEL — 409×578 */}
-              <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[409px] h-[578px] bg-soft rounded-t-[150px] overflow-hidden">
-                <img src={slide.center} className="w-full h-full object-cover" />
-              </div>
+        {/* Center Panel — 409×578 */}
+        <div className="absolute top-36 md:top-44 left-1/2 -translate-x-1/2 w-[300px] md:w-[409px] h-[420px] md:h-[578px] bg-soft rounded-t-[150px] overflow-hidden">
+         <img src={slide.center} className="w-full h-full object-cover" />
+        </div>
 
-              {/* RIGHT PANEL — 329×443 */}
-              <div className="absolute top-40 right-12 w-[329px] h-[443px] bg-soft rounded-t-[120px] overflow-hidden">
-                <img src={slide.right} className="w-full h-full object-cover" />
-              </div>
-
-            </div>
+        {/* Right Panel — 329×443 */}
+        <div className="absolute top-40 md:top-[380px] right-8 w-[240px] md:w-[329px] h-[300px] md:h-[443px] bg-soft rounded-t-[120px] overflow-hidden">
+          <img src={slide.right} className="w-full h-full object-cover" />
+        </div>
+          </div>
           ))}
         </div>
 
         <div className="absolute inset-0 bg-bg/45" />
       </div>
 
-      {/* FOREGROUND CONTENT */}
+      {/* Foreground Content */}
       <div className="relative z-10 container mx-auto px-6 min-h-screen flex items-end pb-24">
         <div className="max-w-3xl">
 
-          <h1 className="font-extrabold text-text tracking-tight leading-[0.9] text-[55px] md:text-[110px] mb-2">
-            LOREUM IPSUM
-          </h1>
+    {/* WRAPPER UNTUK MENURUNKAN SEMUA TEKS */}
+    <div className="mt-20 md:mt-[320px]">
 
-          <h2 className="font-bold text-olive text-[25px] md:text-[32px] leading-tight mb-6">
-            consectetur
-          </h2>
+      {/* TITLE */}
+      <h1 className="font-extrabold text-text tracking-tight leading-[0.9] text-[55px] md:text-[110px] mb-2">
+        LOREUM IPSUM
+      </h1>
 
-          <p className="text-text/80 text-lg max-w-xl leading-relaxed mb-10">
-            Porem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
-          </p>
+      {/* SUBTITLE */}
+      <h2 className="font-bold text-olive text-[25px] md:text-[32px] leading-tight mb-6">
+        consectetur
+      </h2>
 
-          <div className="flex gap-4">
-            <Link to="/feed">
-              <Button className="px-10 py-3">Explore Community</Button>
-            </Link>
-            <Button variant="outline" className="px-10 py-3">Join Now</Button>
-          </div>
+      {/* PARAGRAPH */}
+      <p className="text-text/80 text-lg max-w-xl leading-relaxed mb-10">
+        Porem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
+      </p>
 
+      {/* BUTTONS */}
+      <div className="flex gap-4">
+        <Link to="/feed">
+          <Button className="px-10 py-3">Explore Community</Button>
+        </Link>
+        <Button variant="outline" className="px-10 py-3">Join Now</Button>
+      </div>
+
+    </div>
         </div>
       </div>
+
+
     </section>
   );
 }
 
+// ==============================
 // SECTION 2
+// ==============================
 export function Section2() {
-  /* ======================
-     SECTION 3 — SLIDER LOGIC
-  ======================= */
-
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const galleryImages = [
-    { src: "src/assets/home/section3/section3-img-01.png", alt: "Gallery Image 1" },
-    { src: "src/assets/home/section3/section3-img-02.png", alt: "Gallery Image 2" },
-    { src: "src/assets/home/section3/section3-img-03.png", alt: "Gallery Image 3" },
-    { src: "src/assets/home/section3/section3-img-04.png", alt: "Gallery Image 4" },
-    { src: "src/assets/home/section3/section3-img-05.png", alt: "Gallery Image 5" },
-  ];
-
+  const [current, setCurrent] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  const next = () =>
-    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+  const next = () => setCurrent((prev) => (prev + 1) % galleryImages.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
 
-  const prev = () =>
-    setCurrentImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const galleryImages = [
+    { src: "src/assets/home/section3/section3-img-01.png" },
+    { src: "src/assets/home/section3/section3-img-02.png" },
+    { src: "src/assets/home/section3/section3-img-03.png" },
+    { src: "src/assets/home/section3/section3-img-04.png" },
+    { src: "src/assets/home/section3/section3-img-05.png" },
+  ];
 
+  // SWIPE HANDLERS
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.changedTouches[0].clientX;
   };
@@ -183,60 +177,96 @@ export function Section2() {
 
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return;
+    const dist = touchStartX.current - touchEndX.current;
 
-    const distance = touchStartX.current - touchEndX.current;
+    if (dist > 40) next();
+    if (dist < -40) prev();
+  };
 
-    if (distance > 50) next();
-    if (distance < -50) prev();
+  // CARD POSITIONS (desktop)
+  const POS = {
+    0: "-420px", // left
+    1: "0px",    // center
+    2: "420px",  // right
   };
 
   return (
-    <section className="container mx-auto px-4 py-16">
+    <section className="container mx-auto px-4 py-20">
 
-      {/* ===========================
-          SECTION 2 — INFO BARS
-      ============================ */}
-      <div className="flex flex-col items-center mb-12">
-        {/* Top Rectangle (diperkecil) */}
-        <div className="w-[380px] h-[60px] bg-soft rounded-lg mb-3 opacity-60"></div>
+      {/* =========================== */}
+      {/*      TOP TITLES (UI)        */}
+      {/* =========================== */}
+      <div className="flex flex-col items-center mb-16">
 
-        {/* Bottom Rectangle (diperkecil) */}
-        <div className="w-[420px] h-[40px] bg-soft rounded-lg opacity-60"></div>
+        {/* Title (597x102 → scaled) */}
+        <div className="w-[350px] md:w-[520px] h-[60px] md:h-[90px] bg-soft rounded-lg mb-3 opacity-70"></div>
+
+        {/* Subtitle (679x55 → scaled) */}
+        <div className="w-[380px] md:w-[600px] h-[40px] md:h-[55px] bg-soft rounded-lg opacity-70"></div>
       </div>
 
-      {/* ===========================
-          SECTION 3 — SWIPE CAROUSEL
-      ============================ */}
+      {/* =========================== */}
+      {/*   3-PANEL CENTER CAROUSEL   */}
+      {/* =========================== */}
       <div
-        className="relative max-w-3xl mx-auto overflow-hidden rounded-xl touch-pan-y"
+        className="relative w-full h-[420px] md:h-[500px] flex items-center justify-center touch-pan-y"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div
-          className="flex transition-transform duration-700 ease-out"
-          style={{ transform: `translateX(-${currentImage * 100}%)` }}
-        >
-          {galleryImages.map((image, index) => (
+        {galleryImages.map((item, index) => {
+          const offset = (index - current + galleryImages.length) % galleryImages.length;
+
+          return (
             <div
               key={index}
-              className="min-w-full h-[380px] md:h-[437px] overflow-hidden rounded-xl"
+              className="absolute transition-all duration-700 ease-out pointer-events-none"
+              style={{
+                left: "50%",
+                transform: `translateX(calc(-50% + ${POS[offset as 0 | 1 | 2]}))`,
+                opacity: offset === 1 ? 1 : 0.6,
+                zIndex: offset === 1 ? 20 : 5,
+              }}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
+              {/* LEFT (494x351 → scaled) */}
+              {offset === 0 && (
+                <div className="w-[260px] md:w-[494px] h-[200px] md:h-[351px] rounded-xl bg-soft overflow-hidden">
+                  <img src={item.src} className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              {/* CENTER (781x437) */}
+              {offset === 1 && (
+                <div className="w-[330px] md:w-[781px] h-[260px] md:h-[437px] rounded-xl shadow-lg bg-soft overflow-hidden">
+                  <img src={item.src} className="w-full h-full object-cover" />
+                </div>
+              )}
+
+              {/* RIGHT (461x335 → scaled) */}
+              {offset === 2 && (
+                <div className="w-[230px] md:w-[461px] h-[180px] md:h-[335px] rounded-xl bg-soft overflow-hidden">
+                  <img src={item.src} className="w-full h-full object-cover" />
+                </div>
+              )}
             </div>
-          ))}
-        </div>
+          );
+        })}
+      </div>
+
+      {/* =========================== */}
+      {/*         BOTTOM LINE         */}
+      {/* =========================== */}
+      <div className="flex justify-center mt-16">
+        <div className="w-[250px] md:w-[773px] h-[2px] bg-text/40"></div>
       </div>
     </section>
   );
 }
 
 
+// ==============================
 // SECTION 3
+// ==============================
 export function Section3() {
   return (
     <section className="bg-[#f5f5f5] py-28">
@@ -298,7 +328,9 @@ export function Section3() {
   );
 }
 
+// ==============================
 // SECTION 4
+// ==============================
 export function Section4() {
   return (
     <section className="bg-white py-24">
@@ -345,7 +377,9 @@ export function Section4() {
   );
 }
 
-// MAIN COMPONENT THAT COMBINES ALL SECTIONS
+// ==============================
+// MAIN COMPONENT
+// ==============================
 export default function HomePage() {
   return (
     <div className="min-h-screen">

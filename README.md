@@ -13,10 +13,11 @@ Modul Community dikembangkan menggunakan React, TypeScript, Vite, dan TailwindCS
 
 | Role       | Bagian                                  | Teknologi             | Penanggung Jawab      |
 | ---------- | --------------------------------------- | --------------------- | --------------------- |
-| Frontend 1 | Community Module                        | React + TypeScript    | Pengembang Community  |
-| Frontend 2 | Modul lain (mis. marketplace/dashboard) | React + TypeScript    | Pengembang FE lainnya |
-| Backend 1  | Community API                           | NodeJS/NestJS/Express | Pengembang BE 1       |
-| Backend 2  | Authentication & User API               | NodeJS/NestJS/Express | Pengembang BE 2       |
+| UI/UX       | Modul lain            | Figma                 | UI/UX Design  |
+| Frontend 1  | Community Module      | React + TypeScript    | Pengembang Community  |
+| Frontend 2  | Modul lain            | React + TypeScript    | Pengembang FE lainnya |
+| Backend 1   | Modul lain            | NodeJS/NestJS/Express |Pengembang BE lainnya |
+| Backend 2   | Modul lain            | NodeJS/NestJS/Express | Pengembang BE lainnya |
 
 Setiap anggota tim mengembangkan modulnya masing-masing secara terpisah lalu digabungkan dalam satu repository utama.
 
