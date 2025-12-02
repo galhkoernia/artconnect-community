@@ -10,6 +10,7 @@ import { Header } from './layout/Header';
 import { Footer } from './layout/Footer';
 import HomePage from './app/routes/home/HomePage';
 import { FeedPage } from './app/routes/community/feed/FeedPage';
+import { Section1 } from './layout/Section1';   // ⬅️ Tambahkan Ini
 import './styles/globals.css';
 
 function App() {
@@ -18,12 +19,17 @@ function App() {
       <Router>
         <div className="min-h-screen flex flex-col">
           <Header />
+
+          {/* === HERO GLOBAL === */}
+          <Section1 />
+
           <main className="flex-1">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/feed" element={<FeedPage />} />
             </Routes>
           </main>
+
           <Footer />
         </div>
       </Router>

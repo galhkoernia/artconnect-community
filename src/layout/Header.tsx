@@ -15,12 +15,13 @@ export const Header: React.FC = () => {
 
   // Title Tengah
   const pageTitle = (() => {
-    if (location.pathname === "/") return "Home";
-    if (location.pathname === "/feed") return "Community";
-    if (location.pathname === "/exhibitions") return "Exhibitions";
-    if (location.pathname === "/artists") return "Artists";
-    return "ArtConnect";
-  })();
+  if (location.pathname === "/") return "Community";   // <-- ubah di sini
+  if (location.pathname === "/feed") return "Community";
+  if (location.pathname === "/exhibitions") return "Exhibitions";
+  if (location.pathname === "/artists") return "Artists";
+  return "ArtConnect";
+})();
+
 
   // kategori art
   const categories = ["Digital", "Illustration", "3D Art", "Pixel", "Photo"];
@@ -45,12 +46,16 @@ export const Header: React.FC = () => {
             {/* Desktop Only */}
             <div className="hidden md:flex items-center gap-3">
               {categories.map((c, i) => (
-                <div
-                  key={i}
-                  className="w-[55px] h-[18px] bg-soft rounded-md opacity-70"
-                ></div>
-              ))}
+            <div
+              key={i}
+              className="bg-soft rounded-md px-3 py-1 text-[10px] text-text opacity-80 tracking-wide 
+                 hover:opacity-100 hover:bg-deep hover:text-white transition"
+            >
+              {c}
             </div>
+            ))}
+            </div>
+
 
           </div>
 
