@@ -24,7 +24,7 @@ Modul Community dikembangkan menggunakan React, TypeScript, Vite, dan TailwindCS
 
 ## 3. Struktur Folder
 
-Struktur folder mengikuti pendekatan feature-based agar scalable dan mudah digabungkan antar modul Frontend.
+Struktur folder project ArtConnect Community
 
 ```
 src/
@@ -77,14 +77,12 @@ src/
 │   └── common/
 │       ├── Avatar.tsx
 │       ├── Button.tsx
-│       ├── Card.tsx
-│       └── index files (opsional)
+│       └── Card.tsx
 │
 ├── layout/
 │   ├── Header.tsx
 │   ├── Footer.tsx
-│   ├── Section1.tsx
-│   └── Sidebar.tsx
+│   └── Section1.tsx
 │
 ├── providers/
 │   ├── AuthProviders.tsx
@@ -95,9 +93,7 @@ src/
 │   └── tokens.css
 │
 ├── utils/
-│   ├── App.css
-│   ├── App.tsx
-│   └── index.css
+│   └── formatter.ts
 │
 ├── main.tsx
 ├── index.html
