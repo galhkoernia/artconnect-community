@@ -4,8 +4,7 @@
  * Copyright (c) 2025 Your Company
  */
 
-import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline";
@@ -59,12 +58,13 @@ export function Section1() {
   };
 
   const next = () => {
-    setCurrentIndex(prev => getCircularIndex(prev + 1, SLIDE_IMAGES.length));
+    setCurrentIndex((prev: number) => getCircularIndex(prev + 1, SLIDE_IMAGES.length));
   };
 
   const prev = () => {
-    setCurrentIndex(prev => getCircularIndex(prev - 1, SLIDE_IMAGES.length));
+    setCurrentIndex((prev: number) => getCircularIndex(prev - 1, SLIDE_IMAGES.length));
   };
+
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     touchStartX.current = e.touches[0].clientX;
@@ -109,93 +109,103 @@ export function Section1() {
 
       {/* Background */}
       <div
-        className="absolute inset-0 overflow-hidden z-0"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
+  className="absolute inset-0 overflow-hidden z-0"
+  onTouchStart={handleTouchStart}
+  onTouchEnd={handleTouchEnd}
+>
 
-        {/* IMAGE LAYER  */}
-        <div className="relative w-full h-full">
+  {/* IMAGE LAYER  */}
+  <div className="relative w-full h-full">
 
-          {/* Left Panel */}
-          <div 
-            className="absolute top-48 md:top-56 left-8 md:left-16 
-                w-[180px] md:w-[228px] h-[250px] md:h-[320px]
-                bg-soft rounded-t-[90px] overflow-hidden transition-all duration-500
-                cursor-pointer hover:opacity-90 active:scale-95"
-            onClick={handleLeftClick}
-          >
-            <img 
-              src={getLeftImage()} 
-              alt="Previous" 
-              className="w-full h-full object-cover"
-              draggable="false"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
-          </div>
+    {/*  Background */}
+    <div
+  className="absolute left-1/2 -translate-x-1/2 z-0"
+  style={{
+    width: "1280px",
+    height: "1051px",
+    top: "0",
+    background: "rgba(175, 183, 172, 0.20)", 
+    backdropFilter: "blur(2px)",               
+    borderBottomLeftRadius: "60px",
+    borderBottomRightRadius: "60px",
+  }}
+/>
 
-          {/* Center Panel */}
-          <div 
-            className="absolute top-36 md:top-44 left-1/2 -translate-x-1/2
-                w-[300px] md:w-[409px] h-[420px] md:h-[578px]
-                bg-soft rounded-t-[150px] overflow-hidden shadow-xl transition-all duration-500
-                z-10 cursor-pointer hover:shadow-2xl active:scale-[0.98]"
-            onClick={handleCenterClick}
-          >
-            <img 
-              src={getCenterImage()} 
-              alt="Current" 
-              className="w-full h-full object-cover"
-              draggable="false"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
-          </div>
+    {/* Left Panel */}
+    <div 
+      className="absolute top-48 md:top-56 left-8 md:left-16 
+          w-[180px] md:w-[228px] h-[250px] md:h-[320px]
+          bg-soft rounded-t-[90px] overflow-hidden transition-all duration-500
+          cursor-pointer hover:opacity-90 active:scale-95"
+      onClick={handleLeftClick}
+    >
+      <img 
+        src={getLeftImage()} 
+        alt="Previous" 
+        className="w-full h-full object-cover"
+        draggable="false"
+      />
+      <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
+    </div>
 
-          {/* Right Panel */}
-          <div 
-            className="absolute top-40 md:top-[380px] right-8 
-                w-[240px] md:w-[329px] h-[300px] md:h-[443px]
-                bg-soft rounded-t-[120px] overflow-hidden transition-all duration-500
-                cursor-pointer hover:opacity-90 active:scale-95"
-            onClick={handleRightClick}
-          >
-            <img 
-              src={getRightImage()} 
-              alt="Next" 
-              className="w-full h-full object-cover"
-              draggable="false"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
-          </div>
+    {/* Center Panel */}
+    <div 
+      className="absolute top-36 md:top-44 left-1/2 -translate-x-1/2
+          w-[300px] md:w-[409px] h-[420px] md:h-[578px]
+          bg-soft rounded-t-[150px] overflow-hidden shadow-xl transition-all duration-500
+          z-10 cursor-pointer hover:shadow-2xl active:scale-[0.98]"
+      onClick={handleCenterClick}
+    >
+      <img 
+        src={getCenterImage()} 
+        alt="Current" 
+        className="w-full h-full object-cover"
+        draggable="false"
+      />
+      <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
+    </div>
 
-          {/* Navigation */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2
-              flex gap-2 z-20">
-            {SLIDE_IMAGES.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentIndex(index);
-                }}
-                className={`
-                  w-2 h-2 rounded-full transition-all duration-300
-                  ${index === currentIndex 
-                    ? 'bg-white w-8' 
-                    : 'bg-white/40 hover:bg-white/60 cursor-pointer'
-                  }
-                `}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+    {/* Right Panel */}
+    <div 
+      className="absolute top-40 md:top-[380px] right-8 
+          w-[240px] md:w-[329px] h-[300px] md:h-[443px]
+          bg-soft rounded-t-[120px] overflow-hidden transition-all duration-500
+          cursor-pointer hover:opacity-90 active:scale-95"
+      onClick={handleRightClick}
+    >
+      <img 
+        src={getRightImage()} 
+        alt="Next" 
+        className="w-full h-full object-cover"
+        draggable="false"
+      />
+      <div className="absolute inset-0 bg-black/0 hover:bg-black/5 transition-colors" />
+    </div>
 
-        <div className="absolute inset-0 bg-bg/45" />
+    {/* Navigation */}
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+      {SLIDE_IMAGES.map((_, index) => (
+        <button
+          key={index}
+          onClick={(e) => {
+            e.stopPropagation();
+            setCurrentIndex(index);
+          }}
+          className={`
+            w-2 h-2 rounded-full transition-all duration-300
+            ${index === currentIndex 
+              ? 'bg-white w-8' 
+              : 'bg-white/40 hover:bg-white/60 cursor-pointer'
+            }
+          `}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+
+  </div>
       </div>
+
 
       {/* Text Layer */}
       <div className="relative z-10 container mx-auto px-6 min-h-screen">
@@ -203,8 +213,8 @@ export function Section1() {
       {/* Mobile */}
       <div className="
            absolute 
-           bottom-32           /* HP → text naik jauh agar aman */
-           md:bottom-16        /* Desktop tetap seperti semula */
+           bottom-32           /* HP */
+           md:bottom-8         /* Desktop */
            left-4 md:left-0 
            max-w-3xl
        ">
@@ -223,19 +233,9 @@ export function Section1() {
           Nunc vulputate libero et velit interdum.
         </p>
 
-          <div className="flex gap-4">
-            <Link to="/feed">
-              <Button className="px-10 py-3">Explore Community</Button>
-            </Link>
-              <Button variant="outline" className="px-10 py-3">Join Now</Button>
-          </div>
-
          </div>
       </div>
-
-
-
-
+      
     </section>
   );
 }

@@ -13,17 +13,16 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const [openMenu, setOpenMenu] = useState(false);
 
-  // Title Tengah
+  // Title Center
   const pageTitle = (() => {
-  if (location.pathname === "/") return "Community";   // <-- ubah di sini
+  if (location.pathname === "/") return "Community";
   if (location.pathname === "/feed") return "Community";
-  if (location.pathname === "/exhibitions") return "Exhibitions";
-  if (location.pathname === "/artists") return "Artists";
+  if (location.pathname === "/feature") return "Community";
   return "ArtConnect";
 })();
 
 
-  // kategori art
+  // Art Categories
   const categories = ["Digital", "Illustration", "3D Art", "Pixel", "Photo"];
 
   return (
@@ -59,15 +58,26 @@ export const Header: React.FC = () => {
 
           </div>
 
-          {/* CENTER TITLE */}
-          <h1 className="text-text font-semibold text-lg md:text-xl absolute left-1/2 transform -translate-x-1/2">
+          {/* Center Title */}
+          <h1
+            className="
+            absolute left-1/2 -translate-x-1/2 
+            font-poppins font-bold 
+            text-[28px] md:text-[40px] 
+           text-text 
+            drop-shadow-sm
+            whitespace-nowrap
+            "
+          >
             {pageTitle}
           </h1>
 
 
-          {/* RIGHT SIDE — LOGIN / SIGNUP */}
+
+          {/* Right Side - Login/Register */}
           <div className="flex items-center gap-2">
 
+            {/* Login */}
             <Button
               variant="outline"
               size="sm"
@@ -76,7 +86,7 @@ export const Header: React.FC = () => {
               Login
             </Button>
 
-            {/* SIGNUP ONLY ON DESKTOP */}
+            {/* Sign-up */}
             <Button
               variant="primary"
               size="sm"
@@ -87,7 +97,7 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* MOBILE DROPDOWN */}
+        {/* Moblile Down */}
         {openMenu && (
           <div className="md:hidden mt-3 bg-soft p-4 rounded-lg shadow-lg animate-slideDown">
             <p className="text-text font-medium mb-2">Categories</p>
@@ -103,7 +113,7 @@ export const Header: React.FC = () => {
               ))}
             </div>
 
-            {/* SIGNUP APPEARS HERE ON MOBILE */}
+            {/* Signup Area */}
             <div className="mt-4">
               <Button className="w-full bg-deep text-white hover:bg-olive">
                 Sign Up

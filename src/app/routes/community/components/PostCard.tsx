@@ -65,7 +65,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike }) => {
       {/* Post Content */}
       <CardContent className="p-4">
         <div className="space-y-3">
-          {/* Author info dan date */}
+          {/* Author info date */}
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Avatar 
@@ -82,7 +82,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike }) => {
             </span>
           </div>
 
-          {/* Post title dan description */}
+          {/* Post title and Description */}
           <div>
             <h3 className="font-semibold text-text text-base mb-2 leading-tight">
               {post.title}

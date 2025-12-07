@@ -1,10 +1,10 @@
-/*
+/**
  * Created on Fri Nov 28 2025
  * 
  * Copyright (c) 2025 Your Company
  */
 
-import { Post, PaginatedResponse, User, Comment } from './community.types';
+import { Post, PaginatedResponse, User } from './community.types';
 
 // Mock data - akan diganti dengan real API nanti
 const mockUsers: User[] = [
@@ -33,7 +33,7 @@ const mockPosts: Post[] = [
     id: 'post_1',
     title: 'Lorem Ipsum',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
-    images: [{ url: '', width: 1200, height: 800 }],
+    images: [{ url: 'feed1-img-01.png', width: 1200, height: 800 }],
     author: mockUsers[0],
     tags: ['painting', 'landscape', 'oil'],
     likes: 24,
@@ -55,7 +55,7 @@ const mockPosts: Post[] = [
     id: 'post_3',
     title: 'Elit Sed Do',
     description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    images: [{ url: '', width: 900, height: 900 }],
+    images: [{ url: 'feed1-img-03.png', width: 900, height: 900 }],
     author: mockUsers[0],
     tags: ['abstract', 'mixed-media', 'contemporary'],
     likes: 18,

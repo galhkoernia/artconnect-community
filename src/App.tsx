@@ -6,32 +6,76 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryProvider } from './providers/QueryProvider';
-import { Header } from './layout/Header';
-import { Footer } from './layout/Footer';
+
+import LoginPage from "./app/routes/auth/login/LoginPage";
+import SignupPage from "./app/routes/auth/signup/SignupPage";
+
 import HomePage from './app/routes/home/HomePage';
 import { FeedPage } from './app/routes/community/feed/FeedPage';
-import { Section1 } from './layout/Section1';   // ⬅️ Tambahkan Ini
+import { FeaturePage } from './app/routes/community/feature/FeaturePage';
+
+import { Header } from './layout/Header';
+import { Footer } from './layout/Footer';
+import { Section1 } from './layout/Section1';
+
 import './styles/globals.css';
 
 function App() {
   return (
     <QueryProvider>
       <Router>
-        <div className="min-h-screen flex flex-col">
-          <Header />
+        <Routes>
 
-          {/* === HERO GLOBAL === */}
-          <Section1 />
+          {/* Halaman Auth */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          {/* Halaman Utama */}
+          <Route
+            path="/"
+            element={
+              <div className="min-h-screen flex flex-col">
+                <Header />
 
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/feed" element={<FeedPage />} />
-            </Routes>
-          </main>
+                <Section1 />
 
-          <Footer />
-        </div>
+                <main className="flex-1">
+                  <HomePage />
+                </main>
+
+                <Footer />
+              </div>
+            }
+          />
+
+          <Route
+            path="/feed"
+            element={
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <Section1 />
+                <main className="flex-1">
+                  <FeedPage />
+                </main>
+                <Footer />
+              </div>
+            }
+          />
+
+          <Route
+            path="/feature"
+            element={
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <Section1 />
+                <main className="flex-1">
+                  <FeaturePage />
+                </main>
+                <Footer />
+              </div>
+            }
+          />
+
+        </Routes>
       </Router>
     </QueryProvider>
   );

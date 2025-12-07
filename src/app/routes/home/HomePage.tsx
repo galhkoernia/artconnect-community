@@ -134,54 +134,53 @@ export function Section3() {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
         
         {/* Puzzle Grid */}
-<div className="relative w-full max-w-[380px] mx-auto">
+        <div className="relative w-full max-w-[380px] mx-auto">
 
-  {/* TOP-LEFT */}
-  <img 
-    src="/src/assets/home/section5/section5-img-01.png"
-    alt="top-left"
-    className="absolute top-0 left-0 w-[165px] h-[165px] rounded-[22px] object-cover"
-  />
+          {/* Top Left */}
+          <img 
+            src="/src/assets/home/section5/section5-img-01.png"
+            alt="top-left"
+            className="absolute top-5 left-0 w-[165px] h-[135px] rounded-[16px] object-cover"
+          />
 
-  {/* TOP-RIGHT with DARK BACK BLOCK */}
-  <div className="absolute top-0 right-0">
-    {/* dark behind */}
-    <div className="absolute top-[18px] left-[18px] w-[165px] h-[165px] rounded-[22px] bg-[#333]"></div>
+          {/* Top Right */}
+          <div className="absolute top-0 right-0">
+            <div className="absolute top-[18px] left-[18px] w-[165px] h-[165px] rounded-[22px] bg-[#333]"></div>
 
-    {/* main image */}
-    <img 
-      src="/src/assets/home/section5/section5-img-02.png"
-      alt="top-right"
-      className="relative w-[165px] h-[165px] rounded-[22px] object-cover z-10"
-    />
-  </div>
+              {/* main image */}
+              <img 
+                src="/src/assets/home/section5/section5-img-02.png"
+                alt="top-right"
+                className="relative w-[165px] h-[165px] rounded-[22px] object-cover z-10"
+              />
+            </div>
 
-  {/* BOTTOM-LEFT (light bg behind + dark block on top) */}
-  <div className="absolute top-[165px] left-0">
-    {/* light behind */}
-    <img 
-      src="/src/assets/home/section5/section5-img-03.png"
-      alt="bottom-left-light"
-      className="w-[165px] h-[165px] rounded-[22px] object-cover opacity-[0.4]"
-    />
+          {/* Bottom Left */}
+         <div className="absolute top-[170px] left-0">
+          {/* light behind */}
+          <img 
+            src="/src/assets/home/section5/section5-img-03.png"
+            alt="bottom-left-light"
+            className="w-[170px] h-[185px] rounded-[22px] object-cover opacity-[0.4]"
+          />
 
-    {/* dark in front */}
-    <img 
-      src="/src/assets/home/section5/section5-img-05.png"
-      alt="bottom-left-dark"
-      className="absolute top-[20px] left-[20px] w-[180px] h-[180px] rounded-[22px] object-cover z-20"
-    />
-  </div>
+          {/* Dark in front */}
+          <img 
+            src="/src/assets/home/section5/section5-img-05.png"
+            alt="bottom-left-dark"
+            className="absolute top-[25px] left-[20px] w-[180px] h-[180px] rounded-[22px] object-cover z-20"
+            />
+         </div>
 
-  {/* BOTTOM-RIGHT */}
-  <img 
-    src="/src/assets/home/section5/section5-img-04.png"
-    alt="bottom-right"
-    className="absolute top-[185px] right-0 w-[165px] h-[165px] rounded-[22px] object-cover"
-  />
+          {/* Bottom Right */}
+          <img 
+            src="/src/assets/home/section5/section5-img-04.png"
+            alt="bottom-right"
+            className="absolute top-[205px] right-0 w-[165px] h-[165px] rounded-[22px] object-cover"
+          />
 
-  <div className="h-[380px]"></div>
-</div>
+          <div className="h-[380px]"></div>
+        </div>
 
         {/* Right Text */}
         <div className="flex flex-col justify-center">
@@ -214,8 +213,25 @@ export function Section4() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
+          {/* Image Composition */}
+          <div className="relative w-full h-[350px] lg:h-[500px] flex justify-center order-1 lg:order-2 mb-10 lg:mb-0">
+            {/* Back Image */}
+            <img
+              src="src/assets/home/section5/section5-img-04.png"
+              alt="Main Artwork"
+              className="absolute top-0 right-2 w-[400px] h-[420px] object-cover rounded-xl"
+            />
+
+            {/* Front Image */}
+            <img
+              src="src/assets/home/section5/section5-img-06.png"
+              alt="Front Artwork"
+              className="absolute bottom-8 left-2 w-[350px] h-[380px] object-cover rounded-xl shadow-lg"
+            />
+          </div>
+
           {/* Text Content */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center order-2 lg:order-1">
             <h3 className="text-5xl font-bold text-text mb-4">LOREUM IPSUM</h3>
             <h4 className="text-3xl font-semibold text-olive mb-6">consectetur</h4>
 
@@ -232,22 +248,6 @@ export function Section4() {
             </Link>
           </div>
 
-          {/* Image Composition */}
-          <div className="relative w-full h-[500px] flex justify-center">
-            {/* Back Image */}
-            <img
-              src="src/assets/home/section5/section5-img-04.png"
-              alt="Main Artwork"
-              className="absolute top-0 right-8 w-[400px] h-[450px] object-cover rounded-xl"
-            />
-
-            {/* Front Image */}
-            <img
-              src="src/assets/home/section5/section5-img-06.png"
-              alt="Front Artwork"
-              className="absolute bottom-8 left-12 w-[350px] h-[380px] object-cover rounded-xl shadow-lg"
-            />
-          </div>
         </div>
       </div>
     </section>

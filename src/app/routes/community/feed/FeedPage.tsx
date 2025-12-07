@@ -8,6 +8,7 @@ import { useInfinitePosts } from '../hooks/useInfinitePosts';
 import { PostList } from '../components/PostList';
 import { Button } from '../../../../components/common/Button';
 
+
 export const FeedPage: React.FC = () => {
   const {
     data,
@@ -18,17 +19,20 @@ export const FeedPage: React.FC = () => {
     error
   } = useInfinitePosts(6);
 
-  const allPosts = data?.pages.flatMap(page => page.data) || [];
+  const allPosts = data?.pages.flatMap(page => page.data?.map(post => ({
+    ...post,
+    image: post.images?.[0]?.url || ''
+  })) || []) || [];
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage) fetchNextPage();
   };
 
-  const handleLikePost = (postId: string) => {
+  const handleLikePost = (postId: string | number) => {
     console.log("Post liked:", postId);
   };
 
-  /* ================= LOADING STATE ================= */
+  // Loading State
   if (status === "pending") {
     return (
       <div className="min-h-screen bg-bg py-16">
@@ -54,7 +58,7 @@ export const FeedPage: React.FC = () => {
     );
   }
 
-  /* ================= ERROR STATE ================= */
+  // Error State
   if (status === "error") {
     return (
       <div className="min-h-screen bg-bg flex flex-col items-center justify-center px-4 text-center">
@@ -69,11 +73,11 @@ export const FeedPage: React.FC = () => {
     );
   }
 
-  /* ================= MAIN FEED ================= */
+  // Main Feed
   return (
     <div className="min-h-screen bg-bg">
 
-      {/* ========== FEED LIST ========== */}
+      {/* Feed List */}
       <section className="container mx-auto px-4 py-14">
         <PostList posts={allPosts} onLikePost={handleLikePost} />
 

@@ -9,21 +9,7 @@ Modul Community dikembangkan menggunakan React, TypeScript, Vite, dan TailwindCS
 
 ---
 
-## 2. Struktur Tim
-
-| Role       | Bagian                                  | Teknologi             | Penanggung Jawab      |
-| ---------- | --------------------------------------- | --------------------- | --------------------- |
-| UI/UX       | Modul lain            | Figma                 | UI/UX Design  |
-| Frontend 1  | Community Module      | React + TypeScript    | Pengembang Community  |
-| Frontend 2  | Modul lain            | React + TypeScript    | Pengembang FE lainnya |
-| Backend 1   | Modul lain            | NodeJS/NestJS/Express |Pengembang BE lainnya |
-| Backend 2   | Modul lain            | NodeJS/NestJS/Express | Pengembang BE lainnya |
-
-Setiap anggota tim mengembangkan modulnya masing-masing secara terpisah lalu digabungkan dalam satu repository utama.
-
----
-
-## 3. Teknologi yang Digunakan
+## 2. Teknologi yang Digunakan
 
 * React + TypeScript
 * Vite
@@ -36,72 +22,91 @@ Setiap anggota tim mengembangkan modulnya masing-masing secara terpisah lalu dig
 
 ---
 
-## 4. Struktur Folder
+## 3. Struktur Folder
 
 Struktur folder mengikuti pendekatan feature-based agar scalable dan mudah digabungkan antar modul Frontend.
 
 ```
 src/
-  app/
-    routes/
-      community/
-        feed/
-          FeedPage.tsx
-          index.ts
-        post/
-          PostPage.tsx
-          CreatePostPage.tsx
-          index.ts
-        profile/
-          ProfilePage.tsx
-          index.ts
-        components/
-          PostCard.tsx
-          PostList.tsx
-          CommentList.tsx
-          CreatePostModal.tsx
-          ProfileHeader.tsx
-          GalleryGrid.tsx
-        hooks/
-          useInfinitePosts.ts
-        services/
-          community.api.ts
-          community.types.ts
-  components/
-    common/
-      Button.tsx
-      Card.tsx
-      Modal.tsx
-      Avatar.tsx
-      Skeleton.tsx
-  layout/
-    Header.tsx
-    Footer.tsx
-    Sidebar.tsx
-  providers/
-    QueryProvider.tsx
-    AuthProvider.tsx
-  styles/
-    tokens.css
-    globals.css
-  utils/
-    formatter.ts
-    imageHelper.ts
-  App.tsx
-  main.tsx
+│
+├── app/
+│   └── routes/
+│       ├── auth/
+│       │   ├── components/
+│       │   │   ├── ArtConnectLogin.tsx
+│       │   │   └── ArtConnectSignup.tsx
+│       │   │
+│       │   ├── login/
+│       │   │   └── LoginPage.tsx
+│       │   └── signup/
+│       │       └── SignupPage.tsx
+│       │
+│       ├── community/
+│       │   ├── components/
+│       │   │   ├── PostCard.tsx
+│       │   │   ├── PostList.tsx
+│       │   │   └── index.ts
+│       │   │
+│       │   ├── feature/
+│       │   │   ├── FeaturePage.tsx
+│       │   │   └── index.ts
+│       │   │
+│       │   ├── feed/
+│       │   │   ├── FeedPage.tsx
+│       │   │   └── index.ts
+│       │   │
+│       │   ├── hooks/
+│       │   │   └── useInfinitePosts.ts
+│       │   │
+│       │   ├── profile/
+│       │   │   ├── ProfilePage.tsx
+│       │   │   └── index.ts
+│       │   │
+│       │   └── services/
+│       │       ├── community.api.ts
+│       │       └── community.types.ts
+│       │
+│       └── home/
+│           ├── HomePage.tsx
+│           └── index.ts
+│
+├── assets/
+│   └── (semua asset gambar dan file statis)
+│
+├── components/
+│   └── common/
+│       ├── Avatar.tsx
+│       ├── Button.tsx
+│       ├── Card.tsx
+│       └── index files (opsional)
+│
+├── layout/
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── Section1.tsx
+│   └── Sidebar.tsx
+│
+├── providers/
+│   ├── AuthProviders.tsx
+│   └── QueryProvider.tsx
+│
+├── styles/
+│   ├── globals.css
+│   └── tokens.css
+│
+├── utils/
+│   ├── App.css
+│   ├── App.tsx
+│   └── index.css
+│
+├── main.tsx
+├── index.html
+├── App.tsx
+└── App.css
+
 ```
 
-### Alasan penggunaan struktur ini:
-
-1. Setiap modul bekerja dalam ruangnya sendiri sehingga merge antar developer lebih aman.
-2. Komponen global berada pada `components/common`, sehingga dapat digunakan oleh seluruh tim.
-3. API per fitur dipisahkan pada folder `services`.
-4. Provider seperti React Query, Auth, atau Theme ditempatkan di folder `providers`, memudahkan integrasi dengan modul lain.
-5. Styles dan design tokens dibuat terpusat agar konsisten di seluruh aplikasi.
-
----
-
-## 5. Design Tokens (Warna, Spasi, Radius)
+## 4. Design Tokens (Warna, Spasi, Radius)
 
 Proyek ini menggunakan palet warna berikut yang telah memenuhi standar kontras dan estetika:
 
@@ -116,136 +121,8 @@ Proyek ini menggunakan palet warna berikut yang telah memenuhi standar kontras d
 
 Seluruh token disimpan pada `src/styles/tokens.css`.
 
----
 
-## 6. Fitur Modul Community
-
-Modul Community bertanggung jawab atas:
-
-### Fitur Utama
-
-* Halaman feed komunitas dengan pagination berbasis kursor
-* Halaman detail post (gambar, metadata, komentar)
-* Upload post (gambar, judul, deskripsi, tag)
-* Like, komentar, dan simpan post
-* Profil pengguna (karya, follower, bio)
-* Follow dan unfollow pengguna lain
-
-### Fitur Pendukung
-
-* Skeleton UI
-* Error handling
-* Responsive layout
-* Konsistensi UI sesuai desain
-
----
-
-## 7. API yang Digunakan
-
-Format komunikasi Frontend–Backend konsisten dengan:
-
-* REST API
-* JSON format
-* Cursor-based pagination
-
-Contoh endpoint:
-
-| Endpoint                   | Fungsi            |
-| -------------------------- | ----------------- |
-| `GET /posts?cursor=`       | Feed              |
-| `GET /posts/:id`           | Detail post       |
-| `POST /posts`              | Membuat post      |
-| `POST /posts/:id/like`     | Like/unlike       |
-| `GET /posts/:id/comments`  | Komentar          |
-| `POST /posts/:id/comments` | Menambah komentar |
-| `GET /users/:username`     | Profil user       |
-
----
-
-## 8. Cara Menjalankan Proyek
-
-Instalasi dependensi:
-
-```
-npm install
-```
-
-Menjalankan mode pengembangan:
-
-```
-npm run dev
-```
-
-Membangun aplikasi:
-
-```
-npm run build
-```
-
-Preview hasil build:
-
-```
-npm run preview
-```
-
----
-
-## 9. Standar Coding
-
-1. Menggunakan TypeScript strict mode
-2. Tidak menggunakan inline style kecuali kondisi khusus
-3. Seluruh warna wajib menggunakan Tailwind atau CSS variable
-4. Seluruh service API disimpan pada folder `services`
-5. Seluruh komponen global berada pada `components/common`
-6. Seluruh halaman berada pada `routes/*`
-7. Tidak diperbolehkan hardcode endpoint API
-
----
-
-## 10. Alur Kerja Pengembangan
-
-### Frontend
-
-1. Kembangkan modul masing-masing sesuai folder
-2. Commit dan push ke repository
-3. Integrasi pada repository utama
-4. Code review
-5. Test build dan test integrasi
-6. Deploy preview
-7. Merge ke branch utama
-
-### Backend
-
-1. Menyusun OpenAPI
-2. Menyediakan mock API
-3. Implementasi progresif
-4. Menghubungkan endpoint ke FE
-5. Testing integrasi
-
----
-
-## 11. Rencana Pengembangan (Roadmap)
-
-**Sprint 0 — Setup**
-
-* Setup Vite + TS + Tailwind
-* Struktur folder
-* Design tokens
-* Halaman dummy
-
-**Sprint 1 — Feed dan komponen PostCard**
-
-**Sprint 2 — Detail post dan komentar**
-
-**Sprint 3 — Create post dan upload**
-
-**Sprint 4 — Profil user dan gallery grid**
-
-**Sprint 5 — Search, filter, notifications**
-
----
-
-## 12. Lisensi
+## 5. Lisensi
 
 Project internal dan tidak untuk publikasi.
 
