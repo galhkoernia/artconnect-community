@@ -8,6 +8,13 @@ import { useInfinitePosts } from '../hooks/useInfinitePosts';
 import { PostList } from '../components/PostList';
 import { Button } from '../../../../components/common/Button';
 
+import Img1 from "../../../../assets/feed/feed1/feed1-img-01.png";
+import Img2 from "../../../../assets/feed/feed1/feed1-img-02.png";
+import Img3 from "../../../../assets/feed/feed1/feed1-img-03.png";
+
+// fallback yang dipakai
+const DefaultImg = Img1;
+
 
 export const FeedPage: React.FC = () => {
   const {
@@ -19,10 +26,19 @@ export const FeedPage: React.FC = () => {
     error
   } = useInfinitePosts(6);
 
-  const allPosts = data?.pages.flatMap(page => page.data?.map(post => ({
-    ...post,
-    image: post.images?.[0]?.url || ''
-  })) || []) || [];
+  const fallbackImages = [Img1, Img2, Img3];
+
+  const allPosts = data?.pages.flatMap((page, pageIndex) =>
+  page.data?.map((post, postIndex) => {
+    const fallback = fallbackImages[(postIndex + pageIndex) % fallbackImages.length];
+
+    return {
+      ...post,
+      image: post.images?.[0]?.url || fallback
+    };
+   }) || []
+  ) || [];
+
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage) fetchNextPage();

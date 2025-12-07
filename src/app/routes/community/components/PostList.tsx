@@ -10,8 +10,7 @@ type Post = {
   id: string | number;
   title: string;
   subtitle?: string;
-  image: string;
-  // Add other fields as needed
+  image: string; // sudah berupa imported URL dari FeedPage
 };
 
 interface PostListProps {
@@ -20,9 +19,6 @@ interface PostListProps {
 }
 
 export const PostList = ({ posts, onLikePost }: PostListProps) => {
-  console.log(
-    new URL(`../../assets/feed/feed1/feed1-img-01.png`, import.meta.url).href
-  );
   return (
     <div className="space-y-20">
       {posts.map((post) => (
@@ -53,17 +49,14 @@ export const PostList = ({ posts, onLikePost }: PostListProps) => {
             "
           >
             <img
-              src={
-              new URL(
-                `../../assets/feed/feed1/${post.image}`,
-                import.meta.url
-                ).href
-              }
-            className="w-full h-full object-cover"
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover"
+              draggable="false"
             />
           </div>
 
-          {/* Content */}
+          {/* Body Content */}
           <div className="flex flex-col justify-between flex-grow">
 
             {/* Title */}
@@ -77,7 +70,7 @@ export const PostList = ({ posts, onLikePost }: PostListProps) => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
             </p>
 
-            {/* Tag */}
+            {/* Tags */}
             <div className="flex gap-4 mb-8">
               <span className="px-5 py-2 bg-[var(--color-soft)] text-[var(--color-text)] rounded-xl text-sm">
                 Tag Satu
@@ -87,9 +80,8 @@ export const PostList = ({ posts, onLikePost }: PostListProps) => {
               </span>
             </div>
 
-            {/* Button Like and Comment */}
+            {/* Buttons */}
             <div className="flex gap-8 mt-auto">
-
               <button
                 onClick={() => onLikePost(post.id)}
                 className="
@@ -116,11 +108,12 @@ export const PostList = ({ posts, onLikePost }: PostListProps) => {
                 <FaComment size={18} />
                 Comment
               </button>
-
             </div>
+
           </div>
         </div>
       ))}
     </div>
   );
 };
+

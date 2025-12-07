@@ -24,7 +24,7 @@ function Button({ children, className = "", variant = "default", ...props }: But
   );
 }
 
-// === CAROUSEL DATA ===
+// CAROUSEL DATA
 const SLIDE_IMAGES = [
   "src/assets/home/section1/section1-img-01.png",
   "src/assets/home/section1/section1-img-02.png",
