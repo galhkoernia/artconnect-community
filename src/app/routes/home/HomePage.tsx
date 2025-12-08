@@ -7,6 +7,9 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
+import "swiper/css";
+import "swiper/css/pagination";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "default" | "outline";
 }
@@ -30,7 +33,9 @@ function Button({ children, className = "", variant = "default", ...props }: But
 // ==============================
 export function Section2() {
   const [current, setCurrent] = useState(0);
-  const touchStartX = useRef(0);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartXRef = useRef<number | null>(null);
 
   const galleryImages = [
     { src: "src/assets/home/section3/section3-img-01.png" },
@@ -40,86 +45,156 @@ export function Section2() {
     { src: "src/assets/home/section3/section3-img-05.png" },
   ];
 
-  const next = () => setCurrent(prev => (prev + 1) % galleryImages.length);
-  const prev = () => setCurrent(prev => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const next = () => {
+    setCurrent((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prev = () => {
+    setCurrent((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    touchStartX.current = e.touches[0].clientX;
+    const touchX = e.touches[0].clientX;
+    dragStartXRef.current = touchX;
+    setIsDragging(true);
+    setDragX(0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!isDragging || dragStartXRef.current === null) return;
+    
+    const touchX = e.touches[0].clientX;
+    const deltaX = touchX - dragStartXRef.current;
+    
+    const maxDrag = 300;
+    const limitedDrag = Math.max(Math.min(deltaX, maxDrag), -maxDrag);
+    
+    setDragX(limitedDrag);
+    
+    e.preventDefault(); 
   };
 
   const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const distance = touchStartX.current - touchEndX;
-    const minSwipe = 40;
+    if (!isDragging || dragStartXRef.current === null) return;
     
-    if (Math.abs(distance) > minSwipe) {
-      if (distance > 0) {
-        next();
-      } else {
-        prev();
-      }
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - dragStartXRef.current;
+
+    const threshold = 100; 
+    
+    if (deltaX < -threshold) {
+      next();
+    } else if (deltaX > threshold) {
+      prev();
     }
+    
+    setIsDragging(false);
+    setDragX(0);
+    dragStartXRef.current = null;
   };
 
   const POS = {
-    0: "-420px",
-    1: "0px", 
-    2: "420px",
+    0: -420,
+    1: 0,
+    2: 420,
   };
 
   return (
     <section className="container mx-auto px-4 py-20">
-      <div className="flex flex-col items-center mb-16">
-        <div className="w-[350px] md:w-[520px] h-[60px] md:h-[90px] bg-soft rounded-lg mb-3 opacity-70"></div>
-        <div className="w-[380px] md:w-[600px] h-[40px] md:h-[55px] bg-soft rounded-lg opacity-70"></div>
-      </div>
-
-      {/* TouchAction */}
       <div
-        className="relative w-full h-[420px] md:h-[500px] flex items-center justify-center"
-        style={{ touchAction: 'none' }}
+        className="relative w-full h-[420px] md:h-[500px] flex items-center justify-center overflow-hidden"
         onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        style={{ touchAction: "pan-y" }}
       >
-        {galleryImages.map((item, index) => {
-          const offset = (index - current + galleryImages.length) % galleryImages.length;
+        {galleryImages.map((item, i) => {
+          const offset = (i - current + galleryImages.length) % galleryImages.length;
           if (offset > 2) return null;
+
+          let x = POS[offset];
+          
+          if (isDragging) {
+            if (offset === 1) {
+              x += dragX;
+            } else if (offset === 0) {
+              x += dragX * 0.4;
+            } else if (offset === 2) {
+              x += dragX * 0.4;
+            }
+          }
+
+          let opacity = 0.6;
+          let scale = 1;
+          
+          if (offset === 1) {
+            opacity = 1;
+            scale = 1;
+          } else if (offset === 0) {
+            opacity = 0.7;
+            scale = 0.85;
+          } else if (offset === 2) {
+            opacity = 0.7;
+            scale = 0.85;
+          }
+
+          if (isDragging && Math.abs(dragX) > 50) {
+            if (offset === 1) {
+              opacity = Math.max(0.7, 1 - Math.abs(dragX) / 500);
+            }
+          }
 
           return (
             <div
-              key={index}
-              className="absolute transition-all duration-700 ease-out"
+              key={i}
+              className="absolute transition-all duration-300 ease-out"
               style={{
                 left: "50%",
-                transform: `translateX(calc(-50% + ${POS[offset as 0 | 1 | 2]}))`,
-                opacity: offset === 1 ? 1 : 0.6,
-                zIndex: offset === 1 ? 20 : 5,
+                transform: `translateX(calc(-50% + ${x}px)) scale(${scale})`,
+                opacity: opacity,
+                zIndex: offset === 1 ? 30 : offset === 0 ? 20 : 10,
+                transition: isDragging 
+                  ? "transform 0.1s ease-out, opacity 0.1s ease-out" 
+                  : "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease-out",
+                willChange: isDragging ? "transform, opacity" : "auto",
               }}
             >
-              {offset === 0 && (
-                <div className="w-[260px] md:w-[494px] h-[200px] md:h-[351px] rounded-xl bg-soft overflow-hidden">
-                  <img src={item.src} className="w-full h-full object-cover" draggable="false" />
-                </div>
-              )}
-              
               {offset === 1 && (
-                <div className="w-[330px] md:w-[781px] h-[260px] md:h-[437px] rounded-xl shadow-lg bg-soft overflow-hidden">
-                  <img src={item.src} className="w-full h-full object-cover" draggable="false" />
+                <div className="w-[330px] md:w-[781px] h-[260px] md:h-[437px] bg-soft rounded-xl overflow-hidden shadow-lg">
+                  <img 
+                    src={item.src} 
+                    className="w-full h-full object-cover select-none" 
+                    draggable="false"
+                    alt={`Gallery image ${i + 1}`}
+                  />
                 </div>
               )}
-              
+
+              {offset === 0 && (
+                <div className="w-[260px] md:w-[494px] h-[200px] md:h-[351px] bg-soft rounded-xl overflow-hidden shadow-md">
+                  <img 
+                    src={item.src} 
+                    className="w-full h-full object-cover select-none" 
+                    draggable="false"
+                    alt={`Gallery image ${i + 1}`}
+                  />
+                </div>
+              )}
+
               {offset === 2 && (
-                <div className="w-[230px] md:w-[461px] h-[180px] md:h-[335px] rounded-xl bg-soft overflow-hidden">
-                  <img src={item.src} className="w-full h-full object-cover" draggable="false" />
+                <div className="w-[230px] md:w-[461px] h-[180px] md:h-[335px] bg-soft rounded-xl overflow-hidden shadow-md">
+                  <img 
+                    src={item.src} 
+                    className="w-full h-full object-cover select-none" 
+                    draggable="false"
+                    alt={`Gallery image ${i + 1}`}
+                  />
                 </div>
               )}
             </div>
           );
         })}
-      </div>
-
-      <div className="flex justify-center mt-16">
-        <div className="w-[250px] md:w-[773px] h-[2px] bg-text/40"></div>
       </div>
     </section>
   );
@@ -184,12 +259,13 @@ export function Section3() {
 
         {/* Right Text */}
         <div className="flex flex-col justify-center">
-          <h3 className="text-4xl font-extrabold mb-1">LOREUM IPSUM</h3>
-          <h4 className="text-2xl font-semibold mb-4">consectetur</h4>
+          <h3 className="text-4xl font-extrabold mb-1">ARTCONNECT</h3>
+          <h4 className="text-2xl font-semibold mb-4">Collection</h4>
 
           <p className="text-gray-700 max-w-md leading-relaxed mb-8">
-            Porem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
+            Our growing collection features artworks and cultural pieces from various
+            periods in history. Explore paintings, sculptures, and artifacts curated
+            to inspire and educate visitors around the world.
           </p>
 
           {/* Button */}
@@ -232,20 +308,14 @@ export function Section4() {
 
           {/* Text Content */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <h3 className="text-5xl font-bold text-text mb-4">LOREUM IPSUM</h3>
-            <h4 className="text-3xl font-semibold text-olive mb-6">consectetur</h4>
+            <h3 className="text-5xl font-bold text-text mb-4">Featured Exhibition</h3>
+            <h4 className="text-3xl font-semibold text-olive mb-6">Contemporary Highlights</h4>
 
             <p className="text-gray-600 leading-relaxed max-w-md text-lg mb-8">
-              Porem ipsum dolor sit amet, consectetur<br />
-              adipiscing elit. Nunc vulputate libero et velit<br />
-              interdum, ac aliquet odio mattis.
+              Discover selected works that spotlight artistic innovation and cultural<br />
+              expression. Each piece in this feature reflects the creativity and vision<br />
+              that shape the world of contemporary art.
             </p>
-
-            <Link to="/feature">
-              <Button className="bg-deep text-white hover:bg-olive px-8 py-3">
-                Discover More
-              </Button>
-            </Link>
           </div>
 
         </div>

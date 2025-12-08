@@ -25,7 +25,6 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike }) => {
       setLikeCount(prev => isLiked ? prev - 1 : prev + 1);
       onLike(post.id);
     } catch (error) {
-      // Revert on error
       setIsLiked(!isLiked);
       setLikeCount(prev => isLiked ? prev + 1 : prev - 1);
     }
@@ -48,7 +47,9 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onLike }) => {
           </div>
         )}
         {/* Placeholder */}
-        <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br from-deep to-olive transition-opacity duration-300 ${
+        <div 
+          onLoad={() => setImageLoaded(true)}
+          className={`w-full h-full flex items-center justify-center bg-gradient-to-br from-deep to-olive transition-opacity duration-300 ${
           imageLoaded ? 'opacity-100' : 'opacity-0'
         }`}>
           <div className="text-center text-white p-4">

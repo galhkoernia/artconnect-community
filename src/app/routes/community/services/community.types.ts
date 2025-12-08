@@ -16,6 +16,7 @@ export interface User {
 }
 
 export interface Post {
+  subtitle: string;
   id: string;
   title: string;
   description: string;

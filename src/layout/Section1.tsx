@@ -24,7 +24,7 @@ function Button({ children, className = "", variant = "default", ...props }: But
   );
 }
 
-// CAROUSEL DATA
+// Coursel Images
 const SLIDE_IMAGES = [
   "src/assets/home/section1/section1-img-01.png",
   "src/assets/home/section1/section1-img-02.png",
@@ -114,7 +114,7 @@ export function Section1() {
   onTouchEnd={handleTouchEnd}
 >
 
-  {/* IMAGE LAYER  */}
+  {/* Image Layer  */}
   <div className="relative w-full h-full">
 
     {/*  Background */}
@@ -206,9 +206,8 @@ export function Section1() {
   </div>
       </div>
 
-
       {/* Text Layer */}
-      <div className="relative z-10 container mx-auto px-6 min-h-screen">
+      <div className="relative z-8 container mx-auto px-6 min-h-screen">
 
       {/* Mobile */}
       <div className="
@@ -221,16 +220,17 @@ export function Section1() {
 
           <h1 className="font-extrabold text-text tracking-tight leading-[0.9] 
               text-[55px] md:text-[110px] mb-2">
-              LOREUM IPSUM
+              ARTCONNECT
           </h1>
 
           <h2 className="font-bold text-olive text-[25px] md:text-[32px] mb-6">
-          consectetur
+          Discover Art & History
           </h2>
 
         <p className="text-text/80 text-lg max-w-xl leading-relaxed mb-10">
-          Porem ipsum dolor sit amet, consectetur adipiscing elit.
-          Nunc vulputate libero et velit interdum.
+          Welcome to ArtConnect, a curated space showcasing masterpieces, exhibitions,
+          and stories from the world of art. Explore timeless collections, learn about
+          artists, and experience art through a modern digital gallery.
         </p>
 
          </div>
