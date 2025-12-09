@@ -270,7 +270,7 @@ export function Section3() {
 
           {/* Button */}
           <Link to="/feed">
-            <Button className="w-[270px] h-[84px] bg-deep text-white hover:bg-olive text-xl">
+            <Button className="w-[240px] h-[54px] bg-deep text-white hover:bg-olive text-xl">
               Learn More
             </Button>
           </Link>

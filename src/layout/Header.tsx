@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "../components/common/Button";
 import { Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Header: React.FC = () => {
   const location = useLocation();
@@ -78,6 +79,7 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-2">
 
             {/* Login */}
+            <Link to="/login">
             <Button
               variant="outline"
               size="sm"
@@ -85,8 +87,10 @@ export const Header: React.FC = () => {
             >
               Login
             </Button>
+            </Link>
 
             {/* Sign-up */}
+            <Link to="/signup">
             <Button
               variant="primary"
               size="sm"
@@ -94,6 +98,7 @@ export const Header: React.FC = () => {
             >
               Sign Up
             </Button>
+            </Link>
           </div>
         </div>
 
