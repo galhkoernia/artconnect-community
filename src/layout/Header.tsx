@@ -22,7 +22,6 @@ export const Header: React.FC = () => {
   return "ArtConnect";
 })();
 
-
   // Art Categories
   const categories = ["Digital", "Illustration", "3D Art", "Pixel", "Photo"];
 
