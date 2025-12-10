@@ -27,8 +27,8 @@ function App() {
         <Routes>
 
           {/* Halaman Auth */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/register" element={<LoginPage />} />
+          <Route path="/signin" element={<SignupPage />} />
           {/* Halaman Utama */}
           <Route
             path="/"

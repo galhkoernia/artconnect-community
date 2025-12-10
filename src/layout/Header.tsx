@@ -77,7 +77,7 @@ export const Header: React.FC = () => {
           {/* Right Side - Login/Register */}
           <div className="flex items-center gap-2">
 
-            {/* Login */}
+            {/* Register */}
             <Link to="/register">
             <Button
               variant="outline"
