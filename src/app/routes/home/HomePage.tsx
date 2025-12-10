@@ -35,7 +35,7 @@ export function Section2() {
   const [current, setCurrent] = useState(0);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const dragStartXRef = useRef<number | null>(null);
+  const startX = useRef(0);
 
   const galleryImages = [
     { src: "src/assets/home/section3/section3-img-01.png" },
@@ -45,68 +45,68 @@ export function Section2() {
     { src: "src/assets/home/section3/section3-img-05.png" },
   ];
 
-  const next = () => {
+  const next = () =>
     setCurrent((prev) => (prev + 1) % galleryImages.length);
-  };
 
-  const prev = () => {
+  const prev = () =>
     setCurrent((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
-  };
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    const touchX = e.touches[0].clientX;
-    dragStartXRef.current = touchX;
+  const handleTouchStart = (e) => {
     setIsDragging(true);
+    startX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const moveX = e.touches[0].clientX - startX.current;
+    setDragX(moveX);
+
+    e.preventDefault(); // Mencegah scroll vertikal mengganggu gesture
+  };
+
+  const handleTouchEnd = () => {
+    const threshold = 80;
+
+    if (dragX < -threshold) next();
+    if (dragX > threshold) prev();
+
     setDragX(0);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging || dragStartXRef.current === null) return;
-    
-    const touchX = e.touches[0].clientX;
-    const deltaX = touchX - dragStartXRef.current;
-    
-    const maxDrag = 300;
-    const limitedDrag = Math.max(Math.min(deltaX, maxDrag), -maxDrag);
-    
-    setDragX(limitedDrag);
-    
-    e.preventDefault(); 
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!isDragging || dragStartXRef.current === null) return;
-    
-    const touchEndX = e.changedTouches[0].clientX;
-    const deltaX = touchEndX - dragStartXRef.current;
-
-    const threshold = 100; 
-    
-    if (deltaX < -threshold) {
-      next();
-    } else if (deltaX > threshold) {
-      prev();
-    }
-    
     setIsDragging(false);
-    setDragX(0);
-    dragStartXRef.current = null;
   };
 
-  const POS = {
-    0: -420,
-    1: 0,
-    2: 420,
-  };
+  const POS = { 0: -420, 1: 0, 2: 420 };
 
   return (
     <section className="container mx-auto px-4 py-20">
+      
+      {/* Two Boxes */}
+      <div className="w-full flex flex-col items-center gap-6 mb-16">
+         {/* Bex 1 (597 × 102) */}
+    <div
+      className="rounded-2xl shadow-md"
+      style={{
+        width: "597px",
+        height: "102px",
+        backgroundColor: "#afb7ac"
+      }}
+    />
+
+    {/* Box 2 (697 × 55) */}
+    <div
+      className="rounded-xl shadow-md"
+      style={{
+        width: "697px",
+        height: "55px",
+        backgroundColor: "#afb7ac"
+      }}
+    />
+      </div>
+
       <div
         className="relative w-full h-[420px] md:h-[500px] flex items-center justify-center overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
         style={{ touchAction: "pan-y" }}
       >
         {galleryImages.map((item, i) => {
@@ -114,36 +114,15 @@ export function Section2() {
           if (offset > 2) return null;
 
           let x = POS[offset];
-          
+
+          // **Gesture mengikuti jari**
           if (isDragging) {
-            if (offset === 1) {
-              x += dragX;
-            } else if (offset === 0) {
-              x += dragX * 0.4;
-            } else if (offset === 2) {
-              x += dragX * 0.4;
-            }
+            if (offset === 1) x += dragX;
+            else x += dragX * 0.35;
           }
 
-          let opacity = 0.6;
-          let scale = 1;
-          
-          if (offset === 1) {
-            opacity = 1;
-            scale = 1;
-          } else if (offset === 0) {
-            opacity = 0.7;
-            scale = 0.85;
-          } else if (offset === 2) {
-            opacity = 0.7;
-            scale = 0.85;
-          }
-
-          if (isDragging && Math.abs(dragX) > 50) {
-            if (offset === 1) {
-              opacity = Math.max(0.7, 1 - Math.abs(dragX) / 500);
-            }
-          }
+          let opacity = offset === 1 ? 1 : 0.7;
+          let scale = offset === 1 ? 1 : 0.85;
 
           return (
             <div
@@ -152,44 +131,28 @@ export function Section2() {
               style={{
                 left: "50%",
                 transform: `translateX(calc(-50% + ${x}px)) scale(${scale})`,
-                opacity: opacity,
+                opacity,
                 zIndex: offset === 1 ? 30 : offset === 0 ? 20 : 10,
-                transition: isDragging 
-                  ? "transform 0.1s ease-out, opacity 0.1s ease-out" 
-                  : "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease-out",
-                willChange: isDragging ? "transform, opacity" : "auto",
+                transition: isDragging
+                  ? "none"
+                  : "transform 0.45s ease, opacity 0.45s ease",
               }}
             >
               {offset === 1 && (
                 <div className="w-[330px] md:w-[781px] h-[260px] md:h-[437px] bg-soft rounded-xl overflow-hidden shadow-lg">
-                  <img 
-                    src={item.src} 
-                    className="w-full h-full object-cover select-none" 
-                    draggable="false"
-                    alt={`Gallery image ${i + 1}`}
-                  />
+                  <img src={item.src} className="w-full h-full object-cover select-none" />
                 </div>
               )}
 
               {offset === 0 && (
                 <div className="w-[260px] md:w-[494px] h-[200px] md:h-[351px] bg-soft rounded-xl overflow-hidden shadow-md">
-                  <img 
-                    src={item.src} 
-                    className="w-full h-full object-cover select-none" 
-                    draggable="false"
-                    alt={`Gallery image ${i + 1}`}
-                  />
+                  <img src={item.src} className="w-full h-full object-cover select-none" />
                 </div>
               )}
 
               {offset === 2 && (
                 <div className="w-[230px] md:w-[461px] h-[180px] md:h-[335px] bg-soft rounded-xl overflow-hidden shadow-md">
-                  <img 
-                    src={item.src} 
-                    className="w-full h-full object-cover select-none" 
-                    draggable="false"
-                    alt={`Gallery image ${i + 1}`}
-                  />
+                  <img src={item.src} className="w-full h-full object-cover select-none" />
                 </div>
               )}
             </div>
@@ -199,6 +162,7 @@ export function Section2() {
     </section>
   );
 }
+
 
 // ==============================
 // SECTION 3

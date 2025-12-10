@@ -109,7 +109,7 @@ export function Section1() {
 
       {/* Background */}
       <div
-  className="absolute inset-0 overflow-hidden z-0"
+  className="absolute inset-0 overflow-hidden z-0 pointer-events-none"
   onTouchStart={handleTouchStart}
   onTouchEnd={handleTouchEnd}
 >
