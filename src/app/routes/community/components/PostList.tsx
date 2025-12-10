@@ -6,10 +6,10 @@
 
 import { FaHeart, FaComment } from "react-icons/fa";
 
-// TODO: Update these paths to match your actual asset locations
-const WomanImg = "/images/feed1-img-01.png";
-const BettaImg = "/images/feed1-img-02.png";
-const EyeImg = "/images/feed1-img-03.png";
+// Import gambar langsung dari src/assets
+import WomanImg from "../../../../assets/feed/feed1/feed1-img-01.png";
+import BettaImg from "../../../../assets/feed/feed1/feed1-img-02.png";
+import EyeImg from "../../../../assets/feed/feed1/feed1-img-03.png";
 
 const imageMap: Record<string, string> = {
   "portrait-woman": WomanImg,
@@ -122,4 +122,5 @@ export const PostList = ({ posts, onLikePost }: PostListProps) => {
     </div>
   );
 };
+
 

@@ -212,8 +212,8 @@ export function Section1() {
       {/* Mobile */}
       <div className="
            absolute 
-           bottom-32           /* HP */
-           md:bottom-8         /* Desktop */
+           bottom-8           /* HP */
+           md:bottom-0         /* Desktop */
            left-4 md:left-0 
            max-w-3xl
        ">
