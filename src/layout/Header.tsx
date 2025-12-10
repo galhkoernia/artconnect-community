@@ -120,7 +120,7 @@ export const Header: React.FC = () => {
             {/* Signup Area */}
             <div className="mt-4">
               <Button className="w-full bg-deep text-white hover:bg-olive">
-                Sign Up
+                Sign In
               </Button>
             </div>
           </div>

@@ -61,7 +61,7 @@ export function Section2() {
     const moveX = e.touches[0].clientX - startX.current;
     setDragX(moveX);
 
-    e.preventDefault(); 
+    e.preventDefault();
   };
 
   const handleTouchEnd = () => {
@@ -78,37 +78,36 @@ export function Section2() {
 
   return (
     <section className="container mx-auto px-4 py-20">
-      
+
       {/* Two Boxes */}
       <div className="w-full flex flex-col items-center gap-6 mb-16">
 
-        {/* Box 1 (597 × 102 desktop) */}
-  <div
-    className="
-      rounded-2xl shadow-md
-      w-[90%]              /* Mobile */
-      max-w-[597px]        /* Desktop size */
-      h-[80px]             /* Mobile */
-      md:h-[102px]         /* Desktop */
-      bg-[var(--color-soft)]
-    "
-  />
+        {/* Box 1 */}
+        <div
+          className="
+            rounded-2xl shadow-md
+            w-[90%]
+            max-w-[597px]
+            h-[80px]
+            md:h-[102px]
+            bg-[var(--color-soft)]
+          "
+        />
 
-  {/* Box 2 (697 × 55 desktop) */}
-  <div
-    className="
-      rounded-xl shadow-md
-      w-[90%]              /* Mobile */
-        max-w-[697px]        /* Desktop size */
-        h-[45px]             /* Mobile */
-        md:h-[55px]          /* Desktop */
-        bg-[var(--color-soft)]
-        "
-      />
-
+        {/* Box 2 */}
+        <div
+          className="
+            rounded-xl shadow-md
+            w-[90%]
+            max-w-[697px]
+            h-[45px]
+            md:h-[55px]
+            bg-[var(--color-soft)]
+          "
+        />
       </div>
 
-
+      {/* Carousel */}
       <div
         className="relative w-full h-[420px] md:h-[500px] flex items-center justify-center overflow-hidden"
         onTouchStart={handleTouchStart}
@@ -122,7 +121,6 @@ export function Section2() {
 
           let x = POS[offset];
 
-          // **Gesture mengikuti jari**
           if (isDragging) {
             if (offset === 1) x += dragX;
             else x += dragX * 0.35;
@@ -166,10 +164,22 @@ export function Section2() {
           );
         })}
       </div>
+
+      {/* Single Moving Indicator */}
+      <div className="relative w-full flex justify-center mt-8">
+        <div className="w-[160px] md:w-[280px] h-[4px] bg-[var(--color-soft)] rounded-full overflow-hidden">
+          <div
+            className="h-full bg-[var(--color-olive)] rounded-full transition-all duration-300"
+            style={{
+              width: `calc(100% / ${galleryImages.length})`,
+              transform: `translateX(${(100 / galleryImages.length) * current}%)`
+            }}
+          />
+        </div>
+      </div>
     </section>
   );
 }
-
 
 // ==============================
 // SECTION 3
