@@ -61,7 +61,7 @@ export function Section2() {
     const moveX = e.touches[0].clientX - startX.current;
     setDragX(moveX);
 
-    e.preventDefault(); // Mencegah scroll vertikal mengganggu gesture
+    e.preventDefault(); 
   };
 
   const handleTouchEnd = () => {
@@ -81,26 +81,33 @@ export function Section2() {
       
       {/* Two Boxes */}
       <div className="w-full flex flex-col items-center gap-6 mb-16">
-         {/* Bex 1 (597 × 102) */}
-    <div
-      className="rounded-2xl shadow-md"
-      style={{
-        width: "597px",
-        height: "102px",
-        backgroundColor: "#afb7ac"
-      }}
-    />
 
-    {/* Box 2 (697 × 55) */}
-    <div
-      className="rounded-xl shadow-md"
-      style={{
-        width: "697px",
-        height: "55px",
-        backgroundColor: "#afb7ac"
-      }}
-    />
+        {/* Box 1 (597 × 102 desktop) */}
+  <div
+    className="
+      rounded-2xl shadow-md
+      w-[90%]              /* Mobile */
+      max-w-[597px]        /* Desktop size */
+      h-[80px]             /* Mobile */
+      md:h-[102px]         /* Desktop */
+      bg-[var(--color-soft)]
+    "
+  />
+
+  {/* Box 2 (697 × 55 desktop) */}
+  <div
+    className="
+      rounded-xl shadow-md
+      w-[90%]              /* Mobile */
+        max-w-[697px]        /* Desktop size */
+        h-[45px]             /* Mobile */
+        md:h-[55px]          /* Desktop */
+        bg-[var(--color-soft)]
+        "
+      />
+
       </div>
+
 
       <div
         className="relative w-full h-[420px] md:h-[500px] flex items-center justify-center overflow-hidden"

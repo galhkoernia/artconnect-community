@@ -7,8 +7,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryProvider } from './providers/QueryProvider';
 
-import LoginPage from "./app/routes/auth/login/LoginPage";
-import SignupPage from "./app/routes/auth/signup/SignupPage";
+import LoginPage from "./app/routes/auth/register/RegisterPage";
+import SignupPage from "./app/routes/auth/signin/SigninPage";
 
 import HomePage from './app/routes/home/HomePage';
 import { FeedPage } from './app/routes/community/feed/FeedPage';

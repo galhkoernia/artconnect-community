@@ -12,6 +12,16 @@
 @tailwind utilities;
 
 @layer base {
+
+  :root {
+  --color-deep: #07332c;
+  --color-olive: #485b46;
+  --color-soft: #afb7ac;
+  --color-accent: #bca879;
+  --color-bg: #ededed;
+  --color-text: #1f1f1f;
+}
+
   html {
     font-family: 'Poppins', sans-serif;
   }

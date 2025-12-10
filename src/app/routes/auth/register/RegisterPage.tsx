@@ -6,7 +6,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ArtConnectLogin from "../components/ArtConnectLogin";
+import ArtConnectLogin from "../components/ArtConnectRegister";
 import { useAuth } from "../../../../providers/AuthProviders";
 
 const LoginPage: React.FC = () => {
@@ -23,7 +23,7 @@ const LoginPage: React.FC = () => {
   };
 
   const handleSwitch = () => {
-    navigate("/signup");
+    navigate("/signin");
   };
 
   return (

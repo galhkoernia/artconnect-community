@@ -64,23 +64,38 @@ export const FeedPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-bg">
-      <section className="container mx-auto px-4 py-14">
-        <PostList posts={allPosts} onLikePost={() => {}} />
+      {/* Header Box */}
+      <div className="w-full flex justify-center mt-20 md:mt-28 mb-10">
+    <div
+      className="
+        rounded-2xl 
+        shadow-md
+        bg-[var(--color-olive)]
+        w-[90%]               /* Mobile */
+        max-w-[597px]         /* Desktop width */
+        h-[80px]              /* Mobile height */
+        md:h-[102px]          /* Desktop height */
+      "
+    />
+  </div>
 
-        {hasNextPage && (
-          <div className="flex justify-center mt-14">
-            <Button
-              onClick={() => fetchNextPage()}
-              disabled={isFetchingNextPage}
-              variant="outline"
-              size="lg"
-              className="min-w-32 border-deep text-deep hover:bg-deep hover:text-white transition"
-            >
-              {isFetchingNextPage ? "Loading..." : "Load More"}
-            </Button>
-          </div>
-        )}
-      </section>
+      <section className="container mx-auto px-4 py-14">
+    <PostList posts={allPosts} onLikePost={() => {}} />
+
+    {hasNextPage && (
+      <div className="flex justify-center mt-14">
+        <Button
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+          variant="outline"
+          size="lg"
+          className="min-w-32 border-deep text-deep hover:bg-deep hover:text-white transition"
+        >
+          {isFetchingNextPage ? "Loading..." : "Load More"}
+        </Button>
+      </div>
+    )}
+  </section>
     </div>
   );
 };

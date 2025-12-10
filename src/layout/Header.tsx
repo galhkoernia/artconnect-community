@@ -79,24 +79,24 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-2">
 
             {/* Login */}
-            <Link to="/login">
+            <Link to="/register">
             <Button
               variant="outline"
               size="sm"
               className="border-gray-300 text-text hover:border-deep hover:text-deep"
             >
-              Login
+              Register
             </Button>
             </Link>
 
-            {/* Sign-up */}
-            <Link to="/signup">
+            {/* Sign-In */}
+            <Link to="/signin">
             <Button
               variant="primary"
               size="sm"
               className="hidden md:flex bg-deep text-white hover:bg-olive"
             >
-              Sign Up
+              Sign In
             </Button>
             </Link>
           </div>

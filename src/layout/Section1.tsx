@@ -119,17 +119,17 @@ export function Section1() {
 
     {/*  Background */}
     <div
-  className="absolute left-1/2 -translate-x-1/2 z-0"
-  style={{
-    width: "1280px",
-    height: "1051px",
-    top: "0",
-    background: "rgba(175, 183, 172, 0.20)", 
-    backdropFilter: "blur(2px)",               
-    borderBottomLeftRadius: "60px",
-    borderBottomRightRadius: "60px",
-  }}
-/>
+      className="absolute left-1/2 -translate-x-1/2 z-0"
+      style={{
+        width: "1280px",
+        height: "1051px",
+        top: "0",
+        background: "rgba(175, 183, 172, 0.20)", 
+        backdropFilter: "blur(2px)",               
+        borderBottomLeftRadius: "60px",
+        borderBottomRightRadius: "60px",
+      }}
+    />
 
     {/* Left Panel */}
     <div 
