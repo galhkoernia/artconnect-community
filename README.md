@@ -117,9 +117,4 @@ Proyek ini menggunakan palet warna berikut yang telah memenuhi standar kontras d
 
 Seluruh token disimpan pada `src/styles/tokens.css`.
 
-
-## 5. Lisensi
-
-Project internal dan tidak untuk publikasi.
-
 ---
