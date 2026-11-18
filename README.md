@@ -165,7 +165,6 @@ The frontend is being developed as part of the wider ArtConnect platform. The co
 
 **Galuh Kurnia Pratama**
 
-- Frontend / Software Engineering
 - Contribution: ArtConnect Community Frontend
 
 ## License
